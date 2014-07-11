@@ -29,7 +29,14 @@ q:before, q:after {
     content: '';
     content: none;
 }
-
+a{
+    text-decoration:none;
+    color: black;
+}
+a:hover{
+    text-decoration:none;
+    color:#29d;
+}
 /* remember to define focus styles! */
 :focus {
     outline: 0;

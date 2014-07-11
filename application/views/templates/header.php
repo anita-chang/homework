@@ -6,9 +6,8 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/all.css" />
 </head>
 
 <body>
-	<div class="wrap">
-		<div class="top">
-		</div>
+	<div class="all">
