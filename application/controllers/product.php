@@ -62,7 +62,7 @@ class Product extends CI_Controller {
 			$this->product_model->set_prds();
 
 			$this->load->view('templates/header', $data);
-			$this->load->view('creat_success', $data);
+			$this->load->view('create_success', $data);
 			$this->load->view('templates/footer');
 		}
 	}
