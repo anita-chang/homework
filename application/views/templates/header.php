@@ -19,7 +19,7 @@
 			<div class="menu">
 				<ul>
 					<li><a href="<?php echo site_url() ;?>/view_all" title="商品">商品總覽</a> |</li>
-					<li><a href="" title="新增">新增商品</a> |</li>
+					<li><a href="<?php echo site_url() ;?>/create" title="新增">新增商品</a> |</li>
 				</ul>
 			</div>
 		</div>

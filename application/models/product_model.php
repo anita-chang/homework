@@ -16,4 +16,22 @@ class Product_model extends CI_Model {
 		$query = $this->db->get_where('prds', array('pid' => $pid));
 		return $query->row_array();
 	}
+
+	public function set_prds()
+	{
+		$this->load->helper('url');
+		
+		$pid = url_title($this->input->post('pid'), 'dash', TRUE);
+		
+		$data = array(
+			'pname' => $this->input->post('pname'),
+			'pinfo' => $this->input->post('pinfo'),
+			'pdes' => $this->input->post('pdes'),
+			'pprice' => $this->input->post('pprice')
+		);
+		
+		return $this->db->insert('prds', $data);
+	}
+
+
 }
