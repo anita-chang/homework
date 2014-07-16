@@ -1,5 +1,6 @@
 .all{
-	width: 960px;
+	max-width: 960px;
+	min-width: 200px;
 	height: 100%;
 	margin: 0 auto;
 	position: relative;
@@ -10,20 +11,57 @@
 }
 .logo{
 	float: left;
+	height: 80px;
+	margin-right: 50px;
 }
 .menu{
 	float: left;
 	height: 100%;
-	margin-left: 50px;
 }
 .menu ul{
-	line-height: 60px;
-	padding:10px;
+	line-height: 80px;
 }
 .menu ul li{
 	display: inline;
 }
-.footer p{
+.content{
+	height: 100%;
+	padding: 50px 0;
+}
+.main{
+	width: 220px;
+	float: left;
+	margin:10px;
+}
+.main p{
+	margin-bottom: 10px;
+}
+.main .name{
+	text-align: center;
+}
+.main .des{
+	color: #666;
+}
+.main .price{
+	text-align: right;
+	font-size: 12px;
+	font-style: italic;
+	color: red;
+}
+.prd p{
+	text-align: center;
+}
+.prd .name{
+
+}
+.more{
+	text-align: right;
+	font-style: italic;
+}
+.footer{
 	text-align: right;
 	color: #999;
+}
+.clear{
+	clear: both;
 }

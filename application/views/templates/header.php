@@ -1,3 +1,4 @@
+<?php $this->load->helper('url'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,15 +6,15 @@
 <title><?php echo $title ?></title>
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/all.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/all.css" />
 </head>
 
 <body>
 	<div class="all">
 		<div class="top">
 			<div class="logo">
-				<a href="/" title="home"><img src="image/logo.png" alt="logo" /></a>
+				<a href="/homework" title="home"><img src="<?php echo base_url();?>image/logo.png" alt="logo" /></a>
 			</div>
 			<div class="menu">
 				<ul>
@@ -22,4 +23,5 @@
 				</ul>
 			</div>
 		</div>
+		<div class="clear"></div>
 		<div class="content">
