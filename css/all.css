@@ -31,6 +31,38 @@
 	height: 100%;
 	padding: 50px 0;
 }
+.content h2{
+	font-size: 20px;
+	padding-bottom: 20px;
+}
+.content input,.content textarea{
+	line-height: 30px;
+	font-size: 16px;
+}
+.content textarea{
+	width: 35%;
+	min-width: 165px;
+	height: 100px;
+}
+.content li{
+	margin:10px 0;
+}
+input, textarea{
+	margin: 0;
+	padding: 0;
+	border:2px solid;
+}
+.error p{
+	color: red;
+}
+.success p{
+	font-size: 18px;
+	text-align: center;
+	line-height: 30px;
+}
+.success a{
+	border-bottom: solid 1px;
+}
 .main{
 	width: 220px;
 	float: left;
