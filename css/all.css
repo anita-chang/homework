@@ -24,6 +24,9 @@
 .menu ul li{
 	display: inline;
 }
+.banner img{
+	width: 100%;
+}
 .content{
 	height: 100%;
 	padding: 50px 0;
@@ -34,25 +37,38 @@
 	margin:10px;
 }
 .main p{
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
-.main .name{
+.main .name, .main .des{
 	text-align: center;
 }
 .main .des{
 	color: #666;
 }
+.price{
+	color: red;
+}
 .main .price{
 	text-align: right;
 	font-size: 12px;
 	font-style: italic;
-	color: red;
 }
 .prd p{
 	text-align: center;
 }
-.prd .name{
-
+.product_one img,.product_one .detail{
+	float: left;
+}
+.product_one img{
+	width:50%;
+	height: 200px;
+}
+.product_one .des{
+	margin-top: 30px;
+}
+.detail p{
+	padding-left: 10px;
+	padding-bottom: 30px;
 }
 .more{
 	text-align: right;

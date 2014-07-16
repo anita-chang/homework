@@ -18,10 +18,11 @@
 			</div>
 			<div class="menu">
 				<ul>
-					<li><a href="" title="商品">商品總覽</a> |</li>
+					<li><a href="<?php echo site_url() ;?>/view_all" title="商品">商品總覽</a> |</li>
 					<li><a href="" title="新增">新增商品</a> |</li>
 				</ul>
 			</div>
 		</div>
 		<div class="clear"></div>
+		<div class="banner"><img src="<?php echo base_url();?>image/banner.png" alt="banner" /></div>
 		<div class="content">
