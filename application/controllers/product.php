@@ -39,7 +39,6 @@ class Product extends CI_Controller {
 			$this->load->view('templates/footer');
 	}
 
-
 	public function create()
 	{
 		$this->load->helper('form');
@@ -50,22 +49,29 @@ class Product extends CI_Controller {
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
 
+		$this->load->view('templates/header', $data);
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('templates/header', $data);	
+				
 			$this->load->view('create_prd');
-			$this->load->view('templates/footer');
 			
 		}
 		else
 		{
 			$this->product_model->set_prds();
 
-			$this->load->view('templates/header', $data);
-			$this->load->view('create_success', $data);
-			$this->load->view('templates/footer');
+			$this->load->view('create_success');
+			
 		}
+		$this->load->view('templates/footer');
 	}
-
+	public function delete($pid)
+	{
+		$this->product_model->del_prds($pid);
+		$data['title'] = '刪除產品';
+		$this->load->view('templates/header', $data);
+		$this->load->view('delete_success');
+		$this->load->view('templates/footer');
+	}
 
 }

@@ -97,10 +97,23 @@ input, textarea{
 }
 .product_one .des{
 	margin-top: 30px;
+	border-top: 5px double #28f;
+	padding: 15px 5px;
 }
 .detail p{
 	padding-left: 10px;
 	padding-bottom: 30px;
+}
+.del{
+	margin-top: 20px;
+}
+.del a{
+	border: 2px solid;
+	padding: 5px;
+}
+.del a:hover{
+	background-color: #999;
+	color: black;
 }
 .more{
 	text-align: right;

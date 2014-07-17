@@ -2,6 +2,7 @@
 
 $route['view_all'] = "product/view_all";
 $route['create'] = "product/create";
+$route['delete/(:any)'] = "product/delete/$1";
 //$route['product/view/(:any)'] = "product/view/$1";
 $route['(:any)'] = "product/view/$1";
 $route['default_controller'] = "product";

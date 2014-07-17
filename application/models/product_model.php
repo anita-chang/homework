@@ -16,7 +16,6 @@ class Product_model extends CI_Model {
 		$query = $this->db->get_where('prds', array('pid' => $pid));
 		return $query->row_array();
 	}
-
 	public function set_prds()
 	{
 		$this->load->helper('url');
@@ -32,6 +31,8 @@ class Product_model extends CI_Model {
 		
 		return $this->db->insert('prds', $data);
 	}
-
-
+	public function del_prds($pid)
+	{
+		$this->db->delete('prds', array('pid' => $pid));
+	}
 }
