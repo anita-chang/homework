@@ -16,23 +16,20 @@ class Product_model extends CI_Model {
 		$query = $this->db->get_where('prds', array('pid' => $pid));
 		return $query->row_array();
 	}
-	public function set_prds()
-	{
-		$this->load->helper('url');
-		
-		$pid = url_title($this->input->post('pid'), 'dash', TRUE);
-		
-		$data = array(
-			'pname' => $this->input->post('pname'),
-			'pinfo' => $this->input->post('pinfo'),
-			'pdes' => $this->input->post('pdes'),
-			'pprice' => $this->input->post('pprice')
-		);
-		
+	/*------新增------*/
+	public function set_prds($data)
+	{	
 		return $this->db->insert('prds', $data);
 	}
+	/*------刪除------*/
 	public function del_prds($pid)
 	{
 		$this->db->delete('prds', array('pid' => $pid));
+	}
+	/*------修改------*/
+	//public function up_prds($pid)
+	public function up_prds($data)
+	{
+		$this->db->update('prds', $data, array('pid' => $data['pid']));
 	}
 }

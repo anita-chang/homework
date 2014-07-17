@@ -3,7 +3,8 @@
 $route['view_all'] = "product/view_all";
 $route['create'] = "product/create";
 $route['delete/(:any)'] = "product/delete/$1";
-//$route['product/view/(:any)'] = "product/view/$1";
+$route['update_edit'] = "product/update_edit";
+$route['update_get/(:any)'] = "product/update_get/$1";
 $route['(:any)'] = "product/view/$1";
 $route['default_controller'] = "product";
 $route['404_override'] = '';

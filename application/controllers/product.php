@@ -6,7 +6,7 @@ class Product extends CI_Controller {
 		parent::__construct();
 		$this->load->model('product_model');
 	}
-
+	/*------首頁------*/
 	public function index()
 	{
 		$data['prds'] = $this->product_model->get_prds();
@@ -16,6 +16,7 @@ class Product extends CI_Controller {
 		$this->load->view('product_view', $data);
 		$this->load->view('templates/footer');
 	}
+	/*------商品總覽------*/
 	public function View_all()
 	{
 		$data['prds'] = $this->product_model->get_prds();
@@ -25,6 +26,7 @@ class Product extends CI_Controller {
 		$this->load->view('product_all', $data);
 		$this->load->view('templates/footer');
 	}
+	/*------產品單頁------*/
 	public function view($pid)
 	{
 		$data['prds'] = $this->product_model->get_prds($pid);
@@ -38,33 +40,41 @@ class Product extends CI_Controller {
 			$this->load->view('product_one', $data);
 			$this->load->view('templates/footer');
 	}
-
+	/*------新增------*/
 	public function create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		
-		$data['title'] = '新增產品';
-		
+		$this->load->helper('url');
+
+		$data_tit['title'] = '新增產品';
+		$pid = url_title($this->input->post('pid'), 'dash', TRUE);
+		$data = array(
+			'pname' => $this->input->post('pname'),
+			'pinfo' => $this->input->post('pinfo'),
+			'pdes' => $this->input->post('pdes'),
+			'pprice' => $this->input->post('pprice')
+		);
+
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
 
-		$this->load->view('templates/header', $data);
 		if ($this->form_validation->run() === FALSE)
 		{
-				
+			$this->load->view('templates/header', $data_tit);
 			$this->load->view('create_prd');
-			
+			$this->load->view('templates/footer');
 		}
 		else
 		{
-			$this->product_model->set_prds();
-
+			$this->product_model->set_prds($data);
+			$this->load->view('templates/header', $data_tit);
 			$this->load->view('create_success');
-			
+			$this->load->view('templates/footer');
 		}
-		$this->load->view('templates/footer');
+
 	}
+	/*------刪除------*/
 	public function delete($pid)
 	{
 		$this->product_model->del_prds($pid);
@@ -73,5 +83,50 @@ class Product extends CI_Controller {
 		$this->load->view('delete_success');
 		$this->load->view('templates/footer');
 	}
+	/*------修改------*/
+	public function update_edit()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->helper('url');
+		$data = array(
+			'pid' => $this->input->post('pid'),
+			'pname' => $this->input->post('pname'),
+			'pinfo' => $this->input->post('pinfo'),
+			'pdes' => $this->input->post('pdes'),
+			'pprice' => $this->input->post('pprice')
+		);
 
+		$data_tit['title'] = '商品資訊更新成功';
+
+		$this->form_validation->set_rules('pname', '產品名稱', 'required');
+		$this->form_validation->set_rules('pprice', '產品價格', 'required');
+
+		if ($this->form_validation->run() === FALSE)
+		{
+			$pid = $data['pid'];
+			$this->update_get($pid);
+		}
+		else
+		{
+			$this->product_model->up_prds($data);
+
+			$this->load->view('templates/header', $data_tit);
+			$this->load->view('create_success');
+			$this->load->view('templates/footer');
+		}
+		
+	}
+	public function update_get($pid)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['prds'] = $this->product_model->get_prds($pid);
+		$data['title'] = '更新商品資訊';
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('up_prd');
+		$this->load->view('templates/footer');
+	}
 }
