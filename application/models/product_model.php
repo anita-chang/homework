@@ -27,7 +27,6 @@ class Product_model extends CI_Model {
 		$this->db->delete('prds', array('pid' => $pid));
 	}
 	/*------修改------*/
-	//public function up_prds($pid)
 	public function up_prds($data)
 	{
 		$this->db->update('prds', $data, array('pid' => $data['pid']));

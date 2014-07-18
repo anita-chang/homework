@@ -47,7 +47,7 @@ class Product extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 
-		$data_tit['title'] = '新增產品';
+		$data_tit['title'] = '新增產品 - Readmoo';
 		$pid = url_title($this->input->post('pid'), 'dash', TRUE);
 		$data = array(
 			'pname' => $this->input->post('pname'),
@@ -78,7 +78,7 @@ class Product extends CI_Controller {
 	public function delete($pid)
 	{
 		$this->product_model->del_prds($pid);
-		$data['title'] = '刪除產品';
+		$data['title'] = '刪除產品 - Readmoo';
 		$this->load->view('templates/header', $data);
 		$this->load->view('delete_success');
 		$this->load->view('templates/footer');
@@ -97,7 +97,7 @@ class Product extends CI_Controller {
 			'pprice' => $this->input->post('pprice')
 		);
 
-		$data_tit['title'] = '商品資訊更新成功';
+		$data_tit['title'] = $data['pname'].'更新成功 - Readmoo';
 
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
@@ -112,7 +112,7 @@ class Product extends CI_Controller {
 			$this->product_model->up_prds($data);
 
 			$this->load->view('templates/header', $data_tit);
-			$this->load->view('create_success');
+			$this->load->view('up_success',$data);
 			$this->load->view('templates/footer');
 		}
 		
@@ -123,7 +123,7 @@ class Product extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$data['prds'] = $this->product_model->get_prds($pid);
-		$data['title'] = '更新商品資訊';
+		$data['title'] = $data['prds']['pname'].'商品資訊更新 - Readmoo';
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('up_prd');
