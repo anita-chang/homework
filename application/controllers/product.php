@@ -45,16 +45,8 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
 
 		$data_tit['title'] = '新增產品 - Readmoo';
-		$pid = url_title($this->input->post('pid'), 'dash', TRUE);
-		$data = array(
-			'pname' => $this->input->post('pname'),
-			'pinfo' => $this->input->post('pinfo'),
-			'pdes' => $this->input->post('pdes'),
-			'pprice' => $this->input->post('pprice')
-		);
 
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
@@ -67,7 +59,28 @@ class Product extends CI_Controller {
 		}
 		else
 		{
+			$this->load->helper('url');
+			//------img------//
+			$config['upload_path'] = base_url().'image';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']	= '100';
+			$config['max_width']  = '400';
+			$config['max_height']  = '400';
+			$this->load->library('upload',$config);
+			
+			$this->upload->do_upload();
+			$data_img = $this->upload->data();
+			//------img------//
+			$pid = url_title($this->input->post('pid'), 'dash', TRUE);
+			$data = array(
+				'pimg' => $data_img['file_name'],
+				'pname' => $this->input->post('pname'),
+				'pinfo' => $this->input->post('pinfo'),
+				'pdes' => $this->input->post('pdes'),
+				'pprice' => $this->input->post('pprice')
+			);
 			$this->product_model->set_prds($data);
+
 			$this->load->view('templates/header', $data_tit);
 			$this->load->view('create_success');
 			$this->load->view('templates/footer');
@@ -89,6 +102,7 @@ class Product extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
+
 		$data = array(
 			'pid' => $this->input->post('pid'),
 			'pname' => $this->input->post('pname'),
