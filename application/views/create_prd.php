@@ -6,7 +6,6 @@
 	<ul>
 		<li>產品名稱：<input type="input" name="pname" /></li>
 		<li>產品簡介：<textarea name="pinfo"></textarea></li>
-		<li>產品圖片：<input type="file" name="pimg"></li>
 		<li>產品說明：<textarea name="pdes"></textarea></li>
 		<li>產品價格：<input type="input" name="pprice" /></li>
 	</ul>
