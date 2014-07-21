@@ -140,6 +140,7 @@ input, textarea{
 }
 .del{
 	margin-top: 20px;
+	display: inline-block;
 }
 .del a{
 	border: 2px solid;

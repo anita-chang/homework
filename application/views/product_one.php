@@ -1,9 +1,9 @@
 <div class="product_one">
 	<div class="pimg"><img src="<?php echo base_url();?>image/<?php echo $prds['pimg'] ?>" alt="<?php echo $prds['pname'] ?>" /></div>
 	<div class="detail">
-		<p class="name"><?php echo $prds['pname'] ?></p>
-		<p class="info"><?php echo $prds['pinfo'] ?></p>
-		<p class="price"><?php echo '超值價：$'.$prds['pprice'] ?></p>
+		<p class="name">產品名稱：<?php echo $prds['pname'] ?></p>
+		<p class="info">產品簡介：<?php echo $prds['pinfo'] ?></p>
+		<p class="price">超值價：<?php echo $prds['pprice'] ?></p>
 	</div>
 	<div class="clear"></div>
 	<p class="des"><?php echo $prds['pdes'] ?></p>

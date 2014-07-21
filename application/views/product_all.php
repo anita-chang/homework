@@ -5,5 +5,7 @@
 			<p class="name"><a href="<?php echo site_url().'/'.$prds_item['pid'];?>" title="<?php echo $prds_item['pname'] ?>"><?php echo $prds_item['pname'] ?></a></p>
 	    	<p class="des"><?php echo $prds_item['pinfo'] ?></p>
 	    	<p class="price"><?php echo '超值價：$'.$prds_item['pprice'] ?></p>
+	    	<p class="del"><a href="<?php echo site_url().'/update_get/'.$prds_item['pid'];?>">修改</a></p>
+			<p class="del"><a href="<?php echo site_url().'/delete/'.$prds_item['pid'];?>">刪除</a></p>
     	</div>
 <?php	} ?>
