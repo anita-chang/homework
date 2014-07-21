@@ -67,7 +67,7 @@ class Product extends CI_Controller {
 		else
 		{
 			$name = time().$_FILES['pimg']['name'];
-			move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);
+			$this->up_img($name);
 
 			$pid = url_title($this->input->post('pid'), 'dash', TRUE);
 			$data = array(
@@ -101,30 +101,35 @@ class Product extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 
-		$data = array(
-			'pid' => $this->input->post('pid'),
-			'pname' => $this->input->post('pname'),
-			'pinfo' => $this->input->post('pinfo'),
-			'pdes' => $this->input->post('pdes'),
-			'pprice' => $this->input->post('pprice')
-		);
-
-		$data_tit['title'] = $data['pname'].'更新成功 - Readmoo';
-
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
 
 		if ($this->form_validation->run() === FALSE)
 		{
-			$pid = $data['pid'];
+			$pid = $this->input->post('pid');
 			$this->update_get($pid);
 		}
 		else
 		{
+			$data = array(
+				'pid' => $this->input->post('pid'),
+				'pname' => $this->input->post('pname'),
+				'pinfo' => $this->input->post('pinfo'),
+				'pdes' => $this->input->post('pdes'),
+				'pprice' => $this->input->post('pprice')
+			);
+			if (!empty($_FILES['pimg']['name']))
+			{
+				$name = time().$_FILES['pimg']['name'];
+				$this->up_img($name);
+				$data['pimg'] =  $name;
+			}
+			
 			$this->product_model->up_prds($data);
-
+			$data_tit['title'] = $data['pname'].'更新成功 - Readmoo';
+			
 			$this->load->view('templates/header', $data_tit);
-			$this->load->view('up_success',$data);
+			$this->load->view('up_success');
 			$this->load->view('templates/footer');
 		}
 		
@@ -140,5 +145,9 @@ class Product extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('up_prd');
 		$this->load->view('templates/footer');
+	}
+	public function up_img($name)
+	{
+		move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);
 	}
 }

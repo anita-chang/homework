@@ -2,10 +2,13 @@
 <div class="error">
 	<?php echo validation_errors(); ?>
 </div>
-<?php echo form_open('update_edit') ?>
+<?php echo form_open_multipart('update_edit') ?>
 	<ul>
 		<li>產品名稱：<input type="input" name="pname" value="<?php echo $prds['pname'] ?>" /></li>
 		<li>產品簡介：<textarea name="pinfo"><?php echo $prds['pinfo'] ?></textarea></li>
+		<li>產品美圖：<img src="<?php echo base_url();?>image/<?php echo $prds['pimg'] ?>" alt="<?php echo $prds['pname'] ?>" /></li>
+		<li>圖片檔名：<?php echo $prds['pimg'] ?><input type="file" name="pimg" ></li>
+		<li></li>
 		<li>產品說明：<textarea name="pdes"><?php echo $prds['pdes'] ?></textarea></li>
 		<li>產品價格：<input type="input" name="pprice" value="<?php echo $prds['pprice'] ?>" /></li>
 	</ul>
