@@ -48,14 +48,10 @@ class Product extends CI_Controller {
 		$this->load->helper('url');
 
 		$data_tit['title'] = '新增產品 - Readmoo';
-
-		$this->form_validation->set_message('required', ' %s為必填');
-
-		$this->form_validation->set_rules('pname', '產品名稱', 'required');
-		$this->form_validation->set_rules('pprice', '產品價格', 'required');
+		$this->warn();
 		if (empty($_FILES['pimg']['name']))
 		{
-			$this->form_validation->set_rules('pimg', '產品圖片', 'required');
+			$this->form_validation->set_rules('pimg', '*產品圖片', 'required');
 		}
 
 		if ($this->form_validation->run() === FALSE)
@@ -80,7 +76,7 @@ class Product extends CI_Controller {
 			$this->product_model->set_prds($data);
 
 			$this->load->view('templates/header', $data_tit);
-			$this->load->view('create_success');
+			$this->load->view('create_success', $pid);
 			$this->load->view('templates/footer');
 		}
 
@@ -100,9 +96,8 @@ class Product extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
-
-		$this->form_validation->set_rules('pname', '產品名稱', 'required');
-		$this->form_validation->set_rules('pprice', '產品價格', 'required');
+		
+		$this->warn();
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -146,8 +141,17 @@ class Product extends CI_Controller {
 		$this->load->view('up_prd');
 		$this->load->view('templates/footer');
 	}
+	/*------共用------*/
 	public function up_img($name)
 	{
 		move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);
+	}
+	public function warn()
+	{
+		$this->form_validation->set_message('required', ' %s為必填');
+		$this->form_validation->set_error_delimiters('<p class="err">', '</p>');
+
+		$this->form_validation->set_rules('pname', '*產品名稱', 'required');
+		$this->form_validation->set_rules('pprice', '*產品價格', 'required');
 	}
 }
