@@ -45,11 +45,18 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->helper('url');
 
 		$data_tit['title'] = '新增產品 - Readmoo';
 
+		$this->form_validation->set_message('required', ' %s為必填');
+
 		$this->form_validation->set_rules('pname', '產品名稱', 'required');
 		$this->form_validation->set_rules('pprice', '產品價格', 'required');
+		if (empty($_FILES['pimg']['name']))
+		{
+			$this->form_validation->set_rules('pimg', '產品圖片', 'required');
+		}
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -59,10 +66,13 @@ class Product extends CI_Controller {
 		}
 		else
 		{
-			$this->load->helper('url');
+			$name = time().$_FILES['pimg']['name'];
+			move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);
+
 			$pid = url_title($this->input->post('pid'), 'dash', TRUE);
 			$data = array(
 				'pname' => $this->input->post('pname'),
+				'pimg' => $name,
 				'pinfo' => $this->input->post('pinfo'),
 				'pdes' => $this->input->post('pdes'),
 				'pprice' => $this->input->post('pprice')

@@ -47,6 +47,19 @@
 .content li{
 	margin:10px 0;
 }
+.content li p{
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+.content li.err p{
+	width:100%;
+	color: red;
+	text-align: left;
+}
+.content li input{
+	width: 170px;
+}
 input, textarea{
 	margin: 0;
 	padding: 0;
