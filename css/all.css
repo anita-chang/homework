@@ -71,11 +71,15 @@ input, textarea{
 .main p{
 	margin-bottom: 20px;
 }
-.main .name, .main .des{
+.main .name, .main .des, .main img{
 	text-align: center;
 }
 .main .des{
 	color: #666;
+}
+.main img{
+	width:200px;
+	height: 200px;
 }
 .price{
 	color: red;
@@ -88,11 +92,12 @@ input, textarea{
 .prd p{
 	text-align: center;
 }
-.product_one img,.product_one .detail{
+.product_one .pimg,.product_one .detail{
 	float: left;
 }
-.product_one img{
+.product_one .pimg{
 	width:50%;
+	text-align: center;
 }
 .product_one .des{
 	margin-top: 30px;

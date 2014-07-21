@@ -1,5 +1,5 @@
 <div class="product_one">
-	<img src="" alt="<?php echo $prds['pname'] ?>" />
+	<div class="pimg"><img src="<?php echo base_url();?>image/<?php echo $prds['pimg'] ?>" alt="<?php echo $prds['pname'] ?>" /></div>
 	<div class="detail">
 		<p class="name"><?php echo $prds['pname'] ?></p>
 		<p class="info"><?php echo $prds['pinfo'] ?></p>
