@@ -8,6 +8,11 @@
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/all.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="<?php echo base_url();?>js/jquery.confirm.js"></script>
+<script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
+<link href="<?php echo base_url();?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>

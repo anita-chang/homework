@@ -146,10 +146,6 @@ input, textarea{
 	border: 2px solid;
 	padding: 5px;
 }
-.del a:hover{
-	background-color: #999;
-	color: black;
-}
 .more{
 	text-align: right;
 	font-style: italic;

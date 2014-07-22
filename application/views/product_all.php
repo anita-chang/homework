@@ -6,6 +6,18 @@
 	    	<p class="des"><?php echo $prds_item['pinfo'] ?></p>
 	    	<p class="price"><?php echo '超值價：$'.$prds_item['pprice'] ?></p>
 	    	<p class="del"><a href="<?php echo site_url().'/update_get/'.$prds_item['pid'];?>">修改</a></p>
-			<p class="del"><a href="<?php echo site_url().'/delete/'.$prds_item['pid'];?>">刪除</a></p>
+			<p class="del"><a href="<?php echo site_url().'/delete/'.$prds_item['pid'];?>" class="confirm">刪除</a></p>
     	</div>
 <?php	} ?>
+	<script type="text/javascript">
+	$(".confirm").confirm({
+		text: "確定要刪除資料?",
+		title: "警告視窗",
+		confirm: function(button) {
+			location='<?php echo site_url().'/delete/'.$prds_item['pid'];?>';
+		},
+		confirmButton: "是的，我要刪除",
+		cancelButton: "不要好了",
+		post: true
+	});
+	</script>
