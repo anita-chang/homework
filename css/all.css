@@ -148,3 +148,9 @@ input, textarea{
 .clear{
 	clear: both;
 }
+.item img{
+	margin: 0 auto;
+}
+.carousel-indicators{
+	margin-bottom: -14px;
+}
