@@ -46,9 +46,6 @@
 	margin-left: 150px;
 }
 .sub_create input{
-	background: none;
-	background-color: #999;
-	cursor: pointer;
 	padding:3px;
 }
 .content textarea{
@@ -71,6 +68,7 @@
 }
 .content li input{
 	width: 35%;
+	display: inline-block;
 }
 input, textarea{
 	margin: 0;
@@ -85,17 +83,11 @@ input, textarea{
 	text-align: center;
 	line-height: 30px;
 }
-.success a{
-	border-bottom: solid 1px;
-}
 .main{
 	width: 220px;
 	float: left;
 	margin:10px;
 	text-align: center;
-}
-.main p{
-	margin-bottom: 20px;
 }
 .main .des{
 	color: #666;
@@ -139,7 +131,6 @@ input, textarea{
 	padding-bottom: 30px;
 }
 .del{
-	margin-top: 20px;
 	display: inline-block;
 }
 .del a{
