@@ -16,7 +16,7 @@
 		confirm: function(button) {
 			location='<?php echo site_url().'/delete/'.$prds_item['pid'];?>';
 		},
-		confirmButton: "是的，我要刪除",
+		confirmButton: "對，我要刪除",
 		cancelButton: "不要好了",
 		post: true
 	});
