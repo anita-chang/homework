@@ -5,6 +5,7 @@ class Product extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('product_model');
+		$this->load->model('gbook_model');
 		$this->load->helper('url');
 	}
 	/*------首頁------*/
@@ -64,18 +65,29 @@ class Product extends CI_Controller {
 	/*------產品單頁------*/
 	public function view($pid)
 	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 		$data['prds'] = $this->product_model->get_prds($pid);
+		
 		if (empty($data['prds']))
 		{
 			show_404();
 		}
 		$data['title'] = $data['prds']['pname'].' - Readmoo';
+		$data['query'] = $this->gbook_model->all($pid);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('product_one', $data);
+		$this->load->view('gbook',$data);
 		$this->load->view('templates/footer');
 	}
 	/*------新增------*/
+	public function AddGbook()
+	{
+		$all = $this->input->post();
+		$this->gbook_model->add($all);
+		redirect(site_url().'/'.$all['pid']);
+	}
 	public function create()
 	{
 		$this->load->helper('form');

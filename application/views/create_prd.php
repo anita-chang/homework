@@ -1,13 +1,19 @@
-<h2>新增產品</h2>
+<h2 class="tit_center">新增產品</h2>
 <?php echo form_open_multipart('create') ?>
-	<ul>
-		<li><p>產品名稱：</p><input type="input" name="pname" /><?php echo form_error('pname');?></li>
-		<li><p>產品簡介：</p><textarea name="pinfo"></textarea></li>
-		<li><p>產品美圖：</p><input type="file" name="pimg" accept="image/*" /><?php echo form_error('pimg');?></li>
-		<li><p>產品說明：</p><textarea name="pdes"></textarea></li>
-		<li><p>產品價格：</p><input type="input" name="pprice" /><?php echo form_error('pprice');?></li>
+	<ul class="ul_tit">
+		<li>產品名稱：</li>
+		<li>產品簡介：</li>
+		<li>產品美圖：</li>
+		<li id="tall">產品說明：</li>
+		<li>產品價格：</li>
 	</ul>
-	<div class="sub_create">
-		<input type="submit" name="submit" value="增加新產品" /> 
-	</div>
+	<ul class="ul_cont">
+		<li><input type="input" name="pname" class="form-control" /><?php echo form_error('pname');?></li>
+		<li><input type="input" name="pinfo" class="form-control" /></li>
+		<li><input type="file" name="pimg" accept="image/*" class="form-control" /><?php echo form_error('pimg');?></li>
+		<li><textarea name="pdes" class="form-control" rows="3"></textarea></li>
+		<li><input type="input" name="pprice" class="form-control" /><?php echo form_error('pprice');?></li>
+		<li><button class="btn" type="submit">增加新產品</button></li>
+	</ul>
+	<div class="clear"></div>
 </form>

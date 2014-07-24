@@ -49,16 +49,15 @@
 	padding:3px;
 }
 .content textarea{
-	width: 35%;
-	min-width: 165px;
-	height: 100px;
+	width: 80%;
+	display: inline-block;
 }
 .content li{
 	margin:10px 0;
 }
 .content li p{
 	display: inline-block;
-	width: 150px;
+	width: 20%;
 	text-align: right;
 }
 .content .err{
@@ -66,14 +65,50 @@
 	color: red;
 	padding-left: 5px;
 }
-.content li input{
-	width: 35%;
-	display: inline-block;
-}
 input, textarea{
 	margin: 0;
 	padding: 0;
 	border:2px solid;
+}
+.ul_tit, .ul_cont{
+	float: left;
+	line-height: 30px;
+}
+.ul_cont input, .ul_cont textarea{
+	width: 80%;
+	display: inline-block;
+}
+.ul_tit{
+	width: 20%;
+	text-align: right;
+}
+.ul_tit li{
+	font-size: 18px;
+	line-height: 40px;
+	height: 45px;
+}
+.ul_cont{
+	width:80%;
+}
+.ul_cont img{
+	height: 150px;
+}
+#tall_img{
+	height: 200px;
+}
+#tall{
+	height: 105px;
+}
+.gview{
+	margin-top:20px;
+}
+.gview li:first-child{
+	border-bottom: 1px solid #999;
+	font-weight: bold;
+	font-size: 18px;
+}
+.form-control{
+	height: auto;
 }
 .error p{
 	color: red;
@@ -156,4 +191,7 @@ input, textarea{
 }
 .carousel-indicators{
 	margin-bottom: -14px;
+}
+.tit_center{
+	text-align: center;
 }

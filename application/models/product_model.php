@@ -38,6 +38,7 @@ class Product_model extends CI_Model {
 	public function del_prds($pid)
 	{
 		$this->db->delete('prds', array('pid' => $pid));
+		$this->db->delete('gbook', array('pid' => $pid));
 	}
 	/*------修改------*/
 	public function up_prds($data)
