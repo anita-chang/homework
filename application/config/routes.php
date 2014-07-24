@@ -1,6 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $route['view_all'] = "product/view_all";
+$route['view_all/(:any)'] = "product/view_all/$1";
 $route['create'] = "product/create";
 $route['delete/(:any)'] = "product/delete/$1";
 $route['update_edit'] = "product/update_edit";

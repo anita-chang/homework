@@ -16,6 +16,19 @@ class Product_model extends CI_Model {
 		$query = $this->db->get_where('prds', array('pid' => $pid));
 		return $query->row_array();
 	}
+	/*---總覽-分頁機制---*/
+	public function get_prds_page($page = FALSE,$per_page)
+	{
+		if ($page === FALSE)
+		{
+			$query = $this->db->get('prds', $per_page);
+			return $query->result_array();
+		}
+
+		$view = ($page-1) * $per_page;
+		$query = $this->db->get('prds', $per_page, $view);
+		return $query->result_array();
+	}
 	/*------新增------*/
 	public function set_prds($data)
 	{	
@@ -31,4 +44,5 @@ class Product_model extends CI_Model {
 	{
 		$this->db->update('prds', $data, array('pid' => $data['pid']));
 	}
+
 }

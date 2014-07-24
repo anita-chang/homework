@@ -5,6 +5,7 @@ class Product extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('product_model');
+		$this->load->helper('url');
 	}
 	/*------首頁------*/
 	public function index()
@@ -17,10 +18,44 @@ class Product extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	/*------商品總覽------*/
-	public function View_all()
+	public function View_all($page = FALSE)
 	{
-		$data['prds'] = $this->product_model->get_prds();
+		$this->load->library('pagination');
+
+		$config['base_url'] = site_url().'/view_all';
+		$config['total_rows'] = $this->db->count_all_results('prds');;
+		$config['per_page'] = 8;
+		$config['uri_segment'] = 2;
+		$config['use_page_numbers'] = TRUE;
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = '&laquo;';
+		$config['first_tag_open'] = '<li class="prev page">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = '&raquo;';
+		$config['last_tag_open'] = '<li class="next page">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = '下一頁 >';
+		$config['next_tag_open'] = '<li class="next page">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = '< 上一頁';
+		$config['prev_tag_open'] = '<li class="prev page">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="page">';
+		$config['num_tag_close'] = '</li>';
+		
+		$this->pagination->initialize($config);
+
+		$data['pagelist'] = $this->pagination->create_links();
+		$data['prds'] = $this->product_model->get_prds_page($page,$config['per_page']);
 		$data['title'] = 'Product - Readmoo';
+		if (empty($data['prds']))
+		{
+			show_404();
+		}
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('product_all', $data);
@@ -34,18 +69,17 @@ class Product extends CI_Controller {
 		{
 			show_404();
 		}
-			$data['title'] = $data['prds']['pname'].' - Readmoo';
+		$data['title'] = $data['prds']['pname'].' - Readmoo';
 
-			$this->load->view('templates/header', $data);
-			$this->load->view('product_one', $data);
-			$this->load->view('templates/footer');
+		$this->load->view('templates/header', $data);
+		$this->load->view('product_one', $data);
+		$this->load->view('templates/footer');
 	}
 	/*------新增------*/
 	public function create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
 
 		$data_tit['title'] = '新增產品 - Readmoo';
 		$this->warn();
@@ -95,7 +129,6 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
 		
 		$this->warn();
 

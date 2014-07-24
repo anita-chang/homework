@@ -9,6 +9,10 @@
 			<p class="del"><a href="<?php echo site_url().'/delete/'.$prds_item['pid'];?>" class="confirm">刪除</a></p>
     	</div>
 <?php	} ?>
+<div class="clear"></div>
+<div class="view_page">
+	<?php echo $pagelist; ?>
+</div>
 	<script type="text/javascript">
 	$(".confirm").confirm({
 		text: "確定要刪除資料?",

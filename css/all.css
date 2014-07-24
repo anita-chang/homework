@@ -137,6 +137,9 @@ input, textarea{
 	border: 2px solid;
 	padding: 5px;
 }
+.view_page{
+	text-align: center;
+}
 .more{
 	text-align: right;
 	font-style: italic;
