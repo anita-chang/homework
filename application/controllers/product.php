@@ -66,15 +66,18 @@ class Product extends CI_Controller {
 	/*----新增-gbook----*/
 	public function AddGbook()
 	{
+		$this->load->helper('date');
 		$chck = $this->input->post('chck');
+		date_default_timezone_set("Asia/Taipei");
 		$checknum = $this->session->userdata('Checknum');
+		$datetime = date("Y-m-d H:i:s");
+		
 		if($chck == $checknum)
 		{
 			$all = array(
-				'gid' => $this->input->post('gid'),
 				'pid' => $this->input->post('pid'),
 				'gname' => $this->input->post('gname'),
-				'gtime' => $this->input->post('gtime'),
+				'gtime' => $datetime,
 				'gcontent' => $this->input->post('gcontent')
 			);
 			$this->gbook_model->add($all);

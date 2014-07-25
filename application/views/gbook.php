@@ -1,5 +1,5 @@
 <h2 class="tit_center"><?php echo $prds['pname'];?>的留言板</h2>
-<?php echo form_open_multipart('addgbook','class=form-horizontal') ?>
+<?php echo form_open_multipart('addgbook','class=form-horizontal name=test') ?>
 <div class="form-control">
 	<ul class="ul_tit">
 		<li>我是：</li>
@@ -9,7 +9,6 @@
 	<ul class="ul_cont">
 		<li>
 			<input type="text" name="gname" class="form-control" />
-			<input name="gtime" type="hidden" value="<?php echo date('Y-m-d H:i:s', mktime(date('H')+6));?>" />
 			<input name="pid" type="hidden" value="<?php echo $prds['pid'];?>" />
 		</li>
 		<li><textarea name="gcontent" class="form-control" rows="3"></textarea></li>
