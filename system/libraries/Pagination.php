@@ -141,7 +141,7 @@ class CI_Pagination {
 
 		// Determine the current page number.
 		$CI =& get_instance();
-
+		
 		if ($CI->config->item('enable_query_strings') === TRUE OR $this->page_query_string === TRUE)
 		{
 			if ($CI->input->get($this->query_string_segment) != $base_page)

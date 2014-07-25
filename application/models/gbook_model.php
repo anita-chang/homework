@@ -7,7 +7,7 @@ class Gbook_model extends CI_Model {
 	}
 	function all($pid)
 	{
-		$query = $this->db->get_where('gbook', array('pid' => $pid));
+		$query = $this->db->order_by('gid', 'desc')->get_where('gbook', array('pid' => $pid));
 		return $query;
 	}
 	function add($all)

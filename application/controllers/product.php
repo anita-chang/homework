@@ -22,37 +22,18 @@ class Product extends CI_Controller {
 	public function View_all($page = FALSE)
 	{
 		$this->load->library('pagination');
+		$this->config->load('product', TRUE);
 
+		$config = $this->config->item('product');
 		$config['base_url'] = site_url().'/view_all';
-		$config['total_rows'] = $this->db->count_all_results('prds');;
-		$config['per_page'] = 8;
-		$config['uri_segment'] = 2;
-		$config['use_page_numbers'] = TRUE;
+		$config['total_rows'] = $this->db->count_all_results('prds');
 
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';
-		$config['first_link'] = '&laquo;';
-		$config['first_tag_open'] = '<li class="prev page">';
-		$config['first_tag_close'] = '</li>';
-		$config['last_link'] = '&raquo;';
-		$config['last_tag_open'] = '<li class="next page">';
-		$config['last_tag_close'] = '</li>';
-		$config['next_link'] = '下一頁 >';
-		$config['next_tag_open'] = '<li class="next page">';
-		$config['next_tag_close'] = '</li>';
-		$config['prev_link'] = '< 上一頁';
-		$config['prev_tag_open'] = '<li class="prev page">';
-		$config['prev_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a>';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li class="page">';
-		$config['num_tag_close'] = '</li>';
-		
 		$this->pagination->initialize($config);
 
 		$data['pagelist'] = $this->pagination->create_links();
 		$data['prds'] = $this->product_model->get_prds_page($page,$config['per_page']);
 		$data['title'] = 'Product - Readmoo';
+
 		if (empty($data['prds']))
 		{
 			show_404();
@@ -81,13 +62,14 @@ class Product extends CI_Controller {
 		$this->load->view('gbook',$data);
 		$this->load->view('templates/footer');
 	}
-	/*------新增------*/
+	/*----新增-gbook----*/
 	public function AddGbook()
 	{
 		$all = $this->input->post();
 		$this->gbook_model->add($all);
 		redirect(site_url().'/'.$all['pid']);
 	}
+	/*------新增------*/
 	public function create()
 	{
 		$this->load->helper('form');
@@ -112,13 +94,8 @@ class Product extends CI_Controller {
 			$this->up_img($name);
 
 			$pid = url_title($this->input->post('pid'), 'dash', TRUE);
-			$data = array(
-				'pname' => $this->input->post('pname'),
-				'pimg' => $name,
-				'pinfo' => $this->input->post('pinfo'),
-				'pdes' => $this->input->post('pdes'),
-				'pprice' => $this->input->post('pprice')
-			);
+			$data = $this->input->post();
+			$data['pimg'] = $name;
 			$this->product_model->set_prds($data);
 
 			$this->load->view('templates/header', $data_tit);
