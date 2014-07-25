@@ -1,4 +1,4 @@
-<h2 class="tit_center">關於<?php echo $prds['pname'];?>我想說...</h2>
+<h2 class="tit_center"><?php echo $prds['pname'];?>的留言板</h2>
 <?php echo form_open_multipart('addgbook','class=form-horizontal') ?>
 <div class="form-control">
 	<ul class="ul_tit">
