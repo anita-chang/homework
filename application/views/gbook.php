@@ -3,11 +3,17 @@
 <div class="form-control">
 	<ul class="ul_tit">
 		<li>我是：</li>
-		<li>我想說：</li>
+		<li id="tall">我想說：</li>
+		<li class="kimg"><img src="<?php echo site_url();?>/keycik"/></li>
 	</ul>
 	<ul class="ul_cont">
-		<li><input type="text" name="gname" class="form-control" /><input name="gtime" type="hidden" value="<?php echo date('Y-m-d H:i:s');?>" /><input name="pid" type="hidden" value="<?php echo $prds['pid'];?>" /></li>
+		<li>
+			<input type="text" name="gname" class="form-control" />
+			<input name="gtime" type="hidden" value="<?php echo date('Y-m-d H:i:s', mktime(date('H')+6));?>" />
+			<input name="pid" type="hidden" value="<?php echo $prds['pid'];?>" />
+		</li>
 		<li><textarea name="gcontent" class="form-control" rows="3"></textarea></li>
+		<li><input type="text" name="chck" class="form-control" /></li>
 		<li><button class="btn" type="submit">留言</button></li>
 	</ul>
 	<div class="clear"></div>
