@@ -49,8 +49,9 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+
 		$data['prds'] = $this->product_model->get_prds($pid);
-		
+
 		if (empty($data['prds']))
 		{
 			show_404();
@@ -237,7 +238,7 @@ class Product extends CI_Controller {
 
 		$this->form_validation->set_error_delimiters('<p class="err">', '</p>');
 
-		$this->form_validation->set_rules('pname', '*產品名稱', 'required');
-		$this->form_validation->set_rules('pprice', '*產品價格', 'required|integer');
+		//$this->form_validation->set_rules('pname', '*產品名稱', 'required');
+		//$this->form_validation->set_rules('pprice', '*產品價格', 'required|integer');
 	}
 }
