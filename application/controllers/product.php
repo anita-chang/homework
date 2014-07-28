@@ -118,8 +118,13 @@ class Product extends CI_Controller {
 			$data['pimg'] = $name;
 			$this->product_model->set_prds($data);
 
+			$total = $this->db->count_all_results('prds');
+			$this->config->load('product', TRUE);
+			$config = $this->config->item('product');
+			$data['last_page_link'] = ceil($total/$config['per_page']);
+
 			$this->load->view('templates/header', $data_tit);
-			$this->load->view('create_success', $pid);
+			$this->load->view('create_success', $data);
 			$this->load->view('templates/footer');
 		}
 
@@ -227,10 +232,12 @@ class Product extends CI_Controller {
 	}
 	public function warn()
 	{
+		$this->form_validation->set_message('integer', ' %s必須為數字');
 		$this->form_validation->set_message('required', ' %s為必填');
+
 		$this->form_validation->set_error_delimiters('<p class="err">', '</p>');
 
 		$this->form_validation->set_rules('pname', '*產品名稱', 'required');
-		$this->form_validation->set_rules('pprice', '*產品價格', 'required');
+		$this->form_validation->set_rules('pprice', '*產品價格', 'required|integer');
 	}
 }

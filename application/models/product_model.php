@@ -9,6 +9,8 @@ class Product_model extends CI_Model {
 	{
 		if ($pid === FALSE)
 		{
+			$this->db->order_by('pid', 'RANDOM');
+			$this->db->limit(4);
 			$query = $this->db->get('prds');
 			return $query->result_array();
 		}
