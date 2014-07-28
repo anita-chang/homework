@@ -1,4 +1,3 @@
-<?php $this->load->helper('url'); ?>
 <!DOCTYPE html>
 <html>
 <head>
