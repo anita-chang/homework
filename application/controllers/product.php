@@ -57,8 +57,29 @@ class Product extends CI_Controller {
 			show_404();
 		}
 		$data['title'] = $data['prds']['pname'].' - Readmoo';
-		$data['query'] = $this->gbook_model->all($pid);
+		/*----------------------*/
+		$this->load->helper('date');
+		date_default_timezone_set("Asia/Taipei");
+		$datetime = date("Y-m-d H:i:s");
 
+		$chck = $this->input->post('chck');
+		$checknum = $this->session->userdata('Checknum');
+
+		if ($this->form_validation->run('gbook') === TRUE)
+		{
+			if($chck == $checknum)
+			{
+				$all = array(
+					'pid' => $this->input->post('pid'),
+					'gname' => $this->input->post('gname'),
+					'gtime' => $datetime,
+					'gcontent' => $this->input->post('gcontent')
+					);
+				$this->gbook_model->g_add($all);
+			}
+		}
+		/*----------------------*/
+		$data['query'] = $this->gbook_model->g_show($pid);
 		$this->load->view('templates/header', $data);
 		$this->load->view('product_one', $data);
 		$this->load->view('gbook',$data);
@@ -68,11 +89,12 @@ class Product extends CI_Controller {
 	public function AddGbook()
 	{
 		$this->load->helper('date');
-		$chck = $this->input->post('chck');
 		date_default_timezone_set("Asia/Taipei");
-		$checknum = $this->session->userdata('Checknum');
 		$datetime = date("Y-m-d H:i:s");
-		
+
+		$chck = $this->input->post('chck');
+		$checknum = $this->session->userdata('Checknum');
+
 		if($chck == $checknum)
 		{
 			$all = array(
@@ -81,7 +103,7 @@ class Product extends CI_Controller {
 				'gtime' => $datetime,
 				'gcontent' => $this->input->post('gcontent')
 			);
-			$this->gbook_model->add($all);
+			$this->gbook_model->g_add($all);
 			redirect(site_url().'/'.$all['pid']);
 		}
 		else
@@ -97,13 +119,13 @@ class Product extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$data_tit['title'] = '新增產品 - Readmoo';
-		$this->warn();
+
 		if (empty($_FILES['pimg']['name']))
 		{
-			$this->form_validation->set_rules('pimg', '*產品圖片', 'required');
+			$this->form_validation->run('img');
 		}
 
-		if ($this->form_validation->run() === FALSE)
+		if ($this->form_validation->run('normal') === FALSE)
 		{
 			$this->load->view('templates/header', $data_tit);
 			$this->load->view('create_prd');
@@ -144,10 +166,8 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		
-		$this->warn();
 
-		if ($this->form_validation->run() === FALSE)
+		if ($this->form_validation->run('normal') === FALSE)
 		{
 			$pid = $this->input->post('pid');
 			$this->update_get($pid);
@@ -230,15 +250,5 @@ class Product extends CI_Controller {
 	public function up_img($name)
 	{
 		move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);
-	}
-	public function warn()
-	{
-		$this->form_validation->set_message('integer', ' %s必須為數字');
-		$this->form_validation->set_message('required', ' %s為必填');
-
-		$this->form_validation->set_error_delimiters('<p class="err">', '</p>');
-
-		//$this->form_validation->set_rules('pname', '*產品名稱', 'required');
-		//$this->form_validation->set_rules('pprice', '*產品價格', 'required|integer');
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-$lang['required']			= "The %s field is required.";
+$lang['required']			= "%s為必填";
 $lang['isset']				= "The %s field must have a value.";
 $lang['valid_email']		= "The %s field must contain a valid email address.";
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";
@@ -14,7 +14,7 @@ $lang['alpha_numeric']		= "The %s field may only contain alpha-numeric character
 $lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
 $lang['numeric']			= "The %s field must contain only numbers.";
 $lang['is_numeric']			= "The %s field must contain only numeric characters.";
-$lang['integer']			= "The %s field must contain an integer.";
+$lang['integer']			= "%s必須為數字";
 $lang['regex_match']		= "The %s field is not in the correct format.";
 $lang['matches']			= "The %s field does not match the %s field.";
 $lang['is_unique'] 			= "The %s field must contain a unique value.";

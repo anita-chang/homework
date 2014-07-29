@@ -5,12 +5,12 @@ class Gbook_model extends CI_Model {
 	{
 		$this->load->database();
 	}
-	function all($pid)
+	function g_show($pid)
 	{
 		$query = $this->db->order_by('gid', 'desc')->get_where('gbook', array('pid' => $pid));
 		return $query;
 	}
-	function add($all)
+	function g_add($all)
 	{
 		$this->db->insert('gbook',$all);
 	}
