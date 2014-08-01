@@ -4,10 +4,10 @@ class Product extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('product_model');
-		$this->load->model('gbook_model');
-		$this->load->library('session');
+		$this->load->model(array('product_model','gbook_model'));
 		$this->load->helper('url');
+		$this->load->driver('cache');
+		$this->cache->clean();
 	}
 	/*------首頁------*/
 	public function index()
@@ -26,8 +26,8 @@ class Product extends CI_Controller {
 		$this->config->load('product', TRUE);
 
 		$config = $this->config->item('product');
-		$config['base_url'] = site_url().'/view_all';
-		$config['total_rows'] = $this->db->count_all_results('prds');
+		$config['base_url'] = site_url('/view_all');
+		$config['total_rows'] = $this->product_model->db_count();
 
 		$this->pagination->initialize($config);
 
@@ -57,66 +57,39 @@ class Product extends CI_Controller {
 			show_404();
 		}
 		$data['title'] = $data['prds']['pname'].' - Readmoo';
-		/*----------------------*/
-		$this->load->helper('date');
-		date_default_timezone_set("Asia/Taipei");
-		$datetime = date("Y-m-d H:i:s");
-
-		$chck = $this->input->post('chck');
-		$checknum = $this->session->userdata('Checknum');
-
-		if ($this->form_validation->run('gbook') === TRUE)
-		{
-			if($chck == $checknum)
-			{
-				$all = array(
-					'pid' => $this->input->post('pid'),
-					'gname' => $this->input->post('gname'),
-					'gtime' => $datetime,
-					'gcontent' => $this->input->post('gcontent')
-					);
-				$this->gbook_model->g_add($all);
-			}
-		}
-		/*----------------------*/
 		$data['query'] = $this->gbook_model->g_show($pid);
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('product_one', $data);
 		$this->load->view('gbook',$data);
 		$this->load->view('templates/footer');
 	}
-	/*----新增-gbook----*/
-	public function AddGbook()
+	/*------新增留言------*/
+	public function Addgbook()
 	{
 		$this->load->helper('date');
 		date_default_timezone_set("Asia/Taipei");
 		$datetime = date("Y-m-d H:i:s");
 
-		$chck = $this->input->post('chck');
-		$checknum = $this->session->userdata('Checknum');
-
-		if($chck == $checknum)
-		{
-			$all = array(
+		$all = array(
 				'pid' => $this->input->post('pid'),
 				'gname' => $this->input->post('gname'),
 				'gtime' => $datetime,
 				'gcontent' => $this->input->post('gcontent')
-			);
-			$this->gbook_model->g_add($all);
-			redirect(site_url().'/'.$all['pid']);
-		}
-		else
-		{
-			$pid = $this->input->post('pid');
-			redirect(site_url().'/'.$pid);
-		}
+				);
+		$this->gbook_model->g_add($all);
+
+		redirect(site_url('/'.$all['pid']));
 	}
 	/*------新增------*/
 	public function create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		
+		$this->load->helper('url');
+		date_default_timezone_set("Asia/Taipei");
+		$datetime = date("YmdHis");
 
 		$data_tit['title'] = '新增產品 - Readmoo';
 
@@ -133,7 +106,7 @@ class Product extends CI_Controller {
 		}
 		else
 		{
-			$name = time().$_FILES['pimg']['name'];
+			$name = $datetime.$_FILES['pimg']['name'];
 			$this->up_img($name);
 
 			$pid = url_title($this->input->post('pid'), 'dash', TRUE);
@@ -141,7 +114,7 @@ class Product extends CI_Controller {
 			$data['pimg'] = $name;
 			$this->product_model->set_prds($data);
 
-			$total = $this->db->count_all_results('prds');
+			$total = $this->product_model->db_count();
 			$this->config->load('product', TRUE);
 			$config = $this->config->item('product');
 			$data['last_page_link'] = ceil($total/$config['per_page']);
@@ -150,11 +123,13 @@ class Product extends CI_Controller {
 			$this->load->view('create_success', $data);
 			$this->load->view('templates/footer');
 		}
-
 	}
 	/*------刪除------*/
 	public function delete($pid)
 	{
+		$data = $this->product_model->get_prds($pid);
+		unlink('./image/'.$data['pimg']);
+
 		$this->product_model->del_prds($pid);
 		$data['title'] = '刪除產品 - Readmoo';
 		$this->load->view('templates/header', $data);
@@ -166,6 +141,7 @@ class Product extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$datetime = date("YmdHis");
 
 		if ($this->form_validation->run('normal') === FALSE)
 		{
@@ -183,7 +159,7 @@ class Product extends CI_Controller {
 			);
 			if (!empty($_FILES['pimg']['name']))
 			{
-				$name = time().$_FILES['pimg']['name'];
+				$name = $datetime.$_FILES['pimg']['name'];
 				$this->up_img($name);
 				$data['pimg'] =  $name;
 			}
@@ -209,44 +185,7 @@ class Product extends CI_Controller {
 		$this->load->view('up_prd');
 		$this->load->view('templates/footer');
 	}
-	/*-----圖片驗證-----*/
-	public function Keycik()
-	{
-		$img_height = 30;  // 圖形高度
-		$img_width = 65;   // 圖形寬度
-		$mass = 0;        // 雜點的數量，數字愈大愈不容易辨識
-		$num="";              // rand後所存的地方
-		$num_max = 5;      // 產生6個驗證碼
-		for( $i=0; $i<$num_max; $i++ )
-		{
-			$num .= rand(0,9);
-		} 
-		//把驗證碼存進session
-		$this->session->set_userdata('Checknum',$num);
-		// 創造圖片，定義圖形和文字顏色
-		Header("Content-type: image/PNG");
-		srand((double)microtime()*1000000);
-		$im = imagecreate($img_width,$img_height);
-		$black = ImageColorAllocate($im, 0,0,0);         // (0,0,0)文字為黑色
-		$gray = ImageColorAllocate($im, 255,255,255); // (200,200,200)背景是灰色
-		imagefill($im,0,0,$gray);
-		// 在圖形產上黑點，起干擾作用;
-		for( $i=0; $i<$mass; $i++ )
-		{
-			imagesetpixel($im, rand(0,$img_width), rand(0,$img_height), $black);
-		}
-		// 將數字隨機顯示在圖形上,文字的位置都按一定波動範圍隨機生成
-		$strx=rand(3,8);
-		for( $i=0; $i<$num_max; $i++ )
-		{
-			$strpos=rand(1,8);
-			imagestring($im,5,$strx,$strpos, substr($num,$i,1), $black);
-			$strx+=rand(8,14);
-		}
-		ImagePNG($im);
-		ImageDestroy($im);
-	}
-	/*------共用------*/
+	/*------圖片上傳------*/
 	public function up_img($name)
 	{
 		move_uploaded_file($_FILES['pimg']['tmp_name'], './image/'.$name);

@@ -47,5 +47,9 @@ class Product_model extends CI_Model {
 	{
 		$this->db->update('prds', $data, array('pid' => $data['pid']));
 	}
-
+	/*------count------*/
+	public function db_count()
+	{
+		return $this->db->count_all_results('prds');
+	}
 }

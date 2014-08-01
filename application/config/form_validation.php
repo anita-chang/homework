@@ -12,23 +12,6 @@ $config = array(
 				'rules' => 'required|integer'
 				)
 		),
-	'gbook' =>array(
-			array(
-				'field' => 'gname',
-				'label' => '*留言人',
-				'rules' => 'required'
-				),
-			array(
-				'field' => 'chck',
-				'label' => '*驗證碼',
-				'rules' => 'required'
-				),
-			array(
-				'field' => 'gcontent',
-				'label' => '*留言內容',
-				'rules' => 'required'
-				)
-		),
 	'img' =>array(
 		array(
 			'field' => 'pname',

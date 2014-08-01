@@ -19,7 +19,7 @@
 	<div class="all">
 		<div class="top">
 			<div class="logo">
-				<a href="/homework" title="home"><img src="<?php echo base_url();?>image/logo.png" alt="logo" /></a>
+				<a href="<?php echo base_url();?>" title="home"><img src="<?php echo base_url();?>image/logo.png" alt="logo" /></a>
 			</div>
 			<div class="menu">
 				<ul>
