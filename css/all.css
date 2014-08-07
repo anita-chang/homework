@@ -202,3 +202,10 @@ input, textarea{
 .tit_center{
 	text-align: center;
 }
+.required{
+	display: none;
+	color: red;
+}
+.del_g{
+	float: right;
+}

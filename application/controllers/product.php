@@ -72,14 +72,12 @@ class Product extends CI_Controller {
 		$datetime = date("Y-m-d H:i:s");
 
 		$all = array(
-				'pid' => $this->input->post('pid'),
-				'gname' => $this->input->post('gname'),
-				'gtime' => $datetime,
-				'gcontent' => $this->input->post('gcontent')
-				);
+			'pid' => $this->input->post('pid'),
+			'gname' => $this->input->post('gname'),
+			'gtime' => $datetime,
+			'gcontent' => $this->input->post('gcontent')
+			);
 		$this->gbook_model->g_add($all);
-
-		redirect(site_url('/'.$all['pid']));
 	}
 	/*------新增------*/
 	public function create()
@@ -125,6 +123,10 @@ class Product extends CI_Controller {
 		}
 	}
 	/*------刪除------*/
+	public function del_gbook($gid)
+	{
+		$this->gbook_model->g_del($gid);
+	}
 	public function delete($pid)
 	{
 		$data = $this->product_model->get_prds($pid);

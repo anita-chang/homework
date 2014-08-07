@@ -7,6 +7,7 @@ $route['create'] = "product/create";
 $route['addgbook'] = "product/addgbook";
 $route['captcha_img'] = "product/captcha_img";
 $route['delete/(:any)'] = "product/delete/$1";
+$route['del_gbook/(:any)'] = "product/del_gbook/$1";
 $route['update_edit'] = "product/update_edit";
 $route['update_get/(:any)'] = "product/update_get/$1";
 $route['(:any)'] = "product/view/$1";

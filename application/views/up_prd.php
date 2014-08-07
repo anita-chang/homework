@@ -10,7 +10,7 @@
 	<ul class="ul_cont">
 		<li><input type="input" name="pname" value="<?php echo $prds['pname'] ?>" class="form-control required" /><?php echo form_error('pname');?></li>
 		<li><input type="input" name="pinfo" class="form-control" value="<?php echo $prds['pinfo'] ?>" /></li>
-		<li><img src="<?php echo base_url();?>image/<?php echo $prds['pimg'] ?>" alt="<?php echo $prds['pname'] ?>" /></li>
+		<li><img src="<?php echo base_url('image/'.$prds['pimg']);?>" alt="<?php echo $prds['pname'] ?>" /></li>
 		<li><input type="file" name="pimg" accept="image/*" class="form-control" ></li>
 		<li><textarea name="pdes" class="form-control" rows="3"><?php echo $prds['pdes'] ?></textarea></li>
 		<li><input type="input" name="pprice" value="<?php echo $prds['pprice'] ?>" class="form-control required digits"/><?php echo form_error('pprice');?></li>
